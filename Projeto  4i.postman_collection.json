@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "04641a18-06a0-41dc-9abf-02987f0f116c",
+		"name": "Projeto  4i",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22633537"
+	},
+	"item": [
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://serverest.dev/usuarios",
+					"protocol": "https",
+					"host": [
+						"serverest",
+						"dev"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creat User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Nome correto\", function () {\r",
+							"    pm.variables.get(\"nome\");\r",
+							"        if (\"nome\"!= \" \"){\r",
+							"           pm.response.to.not.be.error;\r",
+							"          }\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Erro nome em branco\", function () {\r",
+							"    pm.variables.get(\"nome\");\r",
+							"        if (\"nome\"== \" \"){\r",
+							"          pm.response.to.have.jsonBody(\"\");\r",
+							"           }\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Email Não Cadastrado Antes\", function () {\r",
+							"    pm.variables.get(\"email\");\r",
+							"    if (\"email\" != \"email\") {\r",
+							"            pm.response.to.not.be.error;\r",
+							"           \r",
+							"          }\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Email correto\", function () {\r",
+							"    pm.variables.get(\"email\");\r",
+							"        if (\"email\"!= \" \"){\r",
+							"           pm.response.to.not.be.error;\r",
+							"          }\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Erro email em branco\", function () {\r",
+							"    pm.variables.get(\"email\");\r",
+							"        if (\"email\"== \" \"){\r",
+							"            pm.response.to.have.jsonBody(\"\");\r",
+							"           }\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Email já cadastrado\", function () {\r",
+							"    pm.variables.get(\"email\");\r",
+							"        if (\"email\"== \"email\"){\r",
+							"          pm.response.to.have.jsonBody(\"\");\r",
+							"           }\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Senha correta\", function () {\r",
+							"    pm.variables.get(\"password\");\r",
+							"        if (\"password\"!= \" \"){\r",
+							"           pm.response.to.not.be.error;\r",
+							"          }\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Erro senha em branco\", function () {\r",
+							"    pm.variables.get(\"password\");\r",
+							"        if (\"password\"== \" \"){\r",
+							"          pm.response.to.have.jsonBody(\"\");\r",
+							"           }\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Bruna\",\r\n  \"email\":\"bruna@qa.com.br\",\r\n  \"password\": \"Br1234@\",\r\n  \"administrador\": \"true\";\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "serverest.dev/usuarios/",
+					"host": [
+						"serverest",
+						"dev"
+					],
+					"path": [
+						"usuarios",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Email já cadastrado\", function () {\r",
+							"    pm.variables.get(\"email\");\r",
+							"    if (\"email\" == \"email\") {\r",
+							"        pm.response.to.have.jsonBody(\"\");\r",
+							"    }\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Email Não Cadastrado Antes\", function () {\r",
+							"    pm.variables.get(\"email\");\r",
+							"    if (\"email\" != \"email\") {\r",
+							"        pm.response.to.not.be.error;\r",
+							"\r",
+							"    }\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Id cadastrado\", function () {\r",
+							"    pm.variables.get(\"_id\");\r",
+							"    if (\"_id\" == \"_id\") {\r",
+							"        pm.response.to.not.be.error;\r",
+							"\r",
+							"    }\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id não cadastrado \", function () {\r",
+							"        pm.variables.get(\"_id\");\r",
+							"        if (\"_id\"!= \"_id\"){\r",
+							"          pm.response.to.have.jsonBody(\"\");\r",
+							"           }\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "serverest.dev/usuarios/0uxuPY0cbmQhpEz1",
+					"host": [
+						"serverest",
+						"dev"
+					],
+					"path": [
+						"usuarios",
+						"0uxuPY0cbmQhpEz1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Não excluir cadastro com produto no carrinho\", function () {\r",
+							"    pm.variables.get(\"_id\");\r",
+							"    pm.variables.get(\"carrinho\");\r",
+							"    if (\"carrinho\" != 0 ) {\r",
+							"        pm.response.to.have.jsonBody(\"\");\r",
+							"    }\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Excluir o cadastro\", function () {\r",
+							"    pm.variables.get(\"_id\");\r",
+							"    pm.variables.get(\"carrinho\");\r",
+							"    if (\"carrinho\" == 0 ) {\r",
+							"        pm.response.to.not.be.error;\r",
+							"\r",
+							"    }\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "serverest.dev/usuarios/0uxuPY0cbmQhpEz1",
+					"host": [
+						"serverest",
+						"dev"
+					],
+					"path": [
+						"usuarios",
+						"0uxuPY0cbmQhpEz1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
